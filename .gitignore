@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Runtime data
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+.nyc_output/
+
+# Production build
+build/
+dist/
+
+# Misc
+.DS_Store
+*.pem
+*.log
+*.tmp
+.cache/
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database backups (jangan simpan di git)
+database/backups/
+*.backup.json
