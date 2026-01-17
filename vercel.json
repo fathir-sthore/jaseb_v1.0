@@ -3,13 +3,29 @@
   "builds": [
     {
       "src": "api/bot.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "runtime": "nodejs20.x"
+      }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/api/bot.js"
+      "dest": "/api/bot.js",
+      "methods": ["GET", "POST", "OPTIONS"]
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "NODE_OPTIONS": "--max-old-space-size=512"
+  },
+  "regions": ["sin1"],
+  "functions": {
+    "api/bot.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }
