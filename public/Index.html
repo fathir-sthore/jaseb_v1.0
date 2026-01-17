@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JASSEB Bot - Telegram Broadcast Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .cta {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+        
+        .telegram-btn {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .telegram-btn:hover {
+            background: #0077b5;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn-icon {
+            margin-right: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #4CAF50;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🤖</div>
+            <h1>JASSEB Telegram Bot <span class="status-badge" id="status">Loading...</span></h1>
+            <p class="tagline">Platform Broadcast Telegram Terbaik - Deploy via Netlify</p>
+        </header>
+        
+        <div class="stats-grid" id="statsContainer">
+            <!-- Stats akan diisi oleh JavaScript -->
+        </div>
+        
+        <div class="features">
+            <h2 style="text-align: center; margin-bottom: 30px; color: #333;">✨ Fitur Unggulan</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📢</div>
+                    <h3>Broadcast Massal</h3>
+                    <p>Kirim pesan ke semua grup sekaligus dengan satu perintah.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">👑</div>
+                    <h3>Sistem Premium</h3>
+                    <p>Dapatkan akses premium dengan menambahkan bot ke 2 grup.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Auto Share</h3>
+                    <p>Jadwalkan pengiriman pesan otomatis ke semua grup.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics Lengkap</h3>
+                    <p>Pantau statistik bot dengan dashboard real-time.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Backup Otomatis</h3>
+                    <p>Data Anda aman dengan backup otomatis setiap 6 jam.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Netlify Hosting</h3>
+                    <p>Deploy di Netlify dengan uptime 99.9% dan kecepatan maksimal.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta">
+            <h2 style="margin-bottom: 20px;">🚀 Mulai Gunakan Bot Sekarang!</h2>
+            <p style="margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Bergabunglah dengan ratusan pengguna yang sudah merasakan kemudahan broadcast dengan JASSEB Bot.
+            </p>
+            <a href="https://t.me/jasseb_bot" class="telegram-btn" target="_blank">
+                <span class="btn-icon">🤖</span> Gunakan Bot di Telegram
+            </a>
+            <p style="margin-top: 20px; opacity: 0.9;">
+                atau scan QR code di bawah:
+            </p>
+            <div id="qrCode" style="margin: 20px auto; width: 150px; height: 150px; background: white; padding: 10px; border-radius: 10px;">
+                <!-- QR Code akan di-generate -->
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2024 JASSEB Bot. Dibuat dengan ❤️ oleh FATHIR STHORE</p>
+            <p>Deployed di Netlify | Powered by Node.js & Telegram Bot API</p>
+            <p style="margin-top: 10px;">
+                <a href="/health" style="color: white; margin: 0 10px;">Health Check</a> | 
+                <a href="/status" style="color: white; margin: 0 10px;">Status API</a> | 
+                <a href="https://github.com/username/bot-jasseb-netlify" style="color: white; margin: 0 10px;">GitHub</a>
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        // Fungsi untuk update stats
+        async function updateStats() {
+            try {
+                const response = await fetch('/status');
+                const data = await response.json();
+                
+                document.getElementById('status').textContent = 'ONLINE';
+                document.getElementById('status').style.background = '#4CAF50';
+                
+                const statsContainer = document.getElementById('statsContainer');
+                statsContainer.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-icon">🏘️</div>
+                        <div class="stat-value">${data.groups || 0}</div>
+                        <div class="stat-label">Total Grup</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value">${data.users || 0}</div>
+                        <div class="stat-label">Total User</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👑</div>
+                        <div class="stat-value">${data.premium || 0}</div>
+                        <div class="stat-label">User Premium</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-value">${new Date(data.last_updated).toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'})}</div>
+                        <div class="stat-label">Update Terakhir</div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+                document.getElementById('status').textContent = 'OFFLINE';
+                document.getElementById('status').style.background = '#f44336';
+                
+                document.getElementById('statsContainer').innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-value">-</div>
+                        <div class="stat-label">Tidak dapat memuat data</div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Generate QR code sederhana
+        function generateQRCode() {
+            const qrContainer = document.getElementById('qrCode');
+            const telegramUrl = 'https://t.me/jasseb_bot';
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(telegramUrl)}`;
+            
+            qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code" style="width: 100%; height: 100%; border-radius: 5px;">`;
+        }
+        
+        // Auto-refresh stats setiap 30 detik
+        updateStats();
+        generateQRCode();
+        setInterval(updateStats, 30000);
+        
+        // Tambahkan event listener untuk error handling
+        window.addEventListener('error', (e) => {
+            console.error('Global error:', e.error);
+        });
+    </script>
+</body>
+</html>
