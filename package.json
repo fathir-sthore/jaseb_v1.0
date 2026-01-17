@@ -1,0 +1,17 @@
+{
+  "name": "bot-jasseb-resming",
+  "version": "1.0.0",
+  "description": "Telegram Bot JASSEB",
+  "main": "api/bot.js",
+  "scripts": {
+    "start": "node api/bot.js",
+    "dev": "node api/bot.js"
+  },
+  "dependencies": {
+    "telegraf": "^4.12.2",
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
